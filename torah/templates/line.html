@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load extra_filters %}
+{% load static %}
+{% block content %}
+<div class="card">
+  <div class="card-header"> {{page}} </div>  
+  
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{english}}</li>
+    <li class="list-group-item">{{paleo}}</li>
+    <li class="list-group-item">
+      {% for l in paleo %}{%if l == ' '%}<br>{%else %}<img src="{% static 'paleo_letters/' %}{{ p|get_index:l }}.svg"  width="15" height="15">{% endif %}{% endfor %}
+    </li>
+    <li class="list-group-item">
+      {% for l in paleo %}{%if l == ' '%}<br>{% else %}<span class="icon-{{ p|get_index:l }}"></span>{% endif %}{% endfor %}            
+    </li>
+    
+  </ul>
+</div>
+{% endblock %}

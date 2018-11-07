@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <title>Grid Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--  <link href="http://bootstrap.rtlcss.com/dist/css/rtl/bootstrap.css" rel="stylesheet"> -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'paleo/paleo.css' %}"></head>
+    <!-- Custom styles for this template -->
+    <link href="http://getbootstrap.com/docs/4.1/examples/grid/grid.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-6">
+
+          <h1>Paleo Hebrew Torah</h1>
+          <a href="http://www.hebrewoldtestament.com/B01C001.htm">paleo torah</a>
+
+          <form method="post">{% csrf_token %}
+            
+            <div class="form-row">
+              <div class="col">
+                <select class="form-control form-control-sm" name="title" required>
+                  <option>genesis</option>
+                  <option>exodus</option>
+                  <option>leviticus</option>
+                  <option>numbers</option>
+                  <option>deuteronomy</option>
+                </select>
+              </div>
+              <div class="col">
+                <input class="form-control form-control-sm" type="number" name="chapter" placeholder="Chapter" required>
+              </div>
+              <div class="col">
+                <input class="form-control form-control-sm" type="number" name="line" required>
+              </div>
+              <div class="col"><input type="submit" class="btn btn-primary btn-sm" type="submit"></div>
+            </div>
+          </form><hr>
+          {% block content %}
+          {% endblock %}
+        </div>
+      </div>
+    </div> <!-- /container -->
+  </body>
+</html>
