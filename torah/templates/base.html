@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -5,23 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <link rel="icon" href="{% static 'favicon.png' %}">
 
-    <title>Grid Template for Bootstrap</title>
+    <title>Paleo Torah</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!--  <link href="http://bootstrap.rtlcss.com/dist/css/rtl/bootstrap.css" rel="stylesheet"> -->
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'paleo/paleo.css' %}"></head>
-    <!-- Custom styles for this template -->
-    <link href="http://getbootstrap.com/docs/4.1/examples/grid/grid.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/grid.css' %}">
+    {% block css %}
+    {% endblock %}
+    
   </head>
 
   <body>
     <div class="container">
       <div class="row justify-content-center">
-        <div class="col-6">
+        <div class="col-md-6 col-sm-12">
 
           <h1>Paleo Hebrew Torah</h1>
           <a href="http://www.hebrewoldtestament.com/B01C001.htm">paleo torah</a>
@@ -31,18 +31,20 @@
             <div class="form-row">
               <div class="col">
                 <select class="form-control form-control-sm" name="title" required>
-                  <option>genesis</option>
-                  <option>exodus</option>
-                  <option>leviticus</option>
-                  <option>numbers</option>
-                  <option>deuteronomy</option>
+                  <option{%if current.title == "genesis"%} selected{%endif%}>genesis</option>
+                  <option{%if current.title == "exodus"%} selected{%endif%}>exodus</option>
+                  <option{%if current.title == "leviticus"%} selected{%endif%}>leviticus</option>
+                  <option{%if current.title == "numbers"%} selected{%endif%}>numbers</option>
+                  <option{%if current.title == "deuteronomy"%} selected{%endif%}>deuteronomy</option>
                 </select>
               </div>
               <div class="col">
-                <input class="form-control form-control-sm" type="number" name="chapter" placeholder="Chapter" required>
+                <input class="form-control form-control-sm" type="number" value="{{current.chapter}}" 
+                  name="chapter" placeholder="Chapter" required>
               </div>
               <div class="col">
-                <input class="form-control form-control-sm" type="number" name="line" required>
+                <input class="form-control form-control-sm" type="number" value="{{current.line}}" 
+                 name="line" required>
               </div>
               <div class="col"><input type="submit" class="btn btn-primary btn-sm" type="submit"></div>
             </div>
@@ -52,5 +54,7 @@
         </div>
       </div>
     </div> <!-- /container -->
+    {% block js %}
+    {% endblock %}
   </body>
 </html>

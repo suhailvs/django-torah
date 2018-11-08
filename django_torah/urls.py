@@ -19,5 +19,6 @@ from torah import views
 urlpatterns = [
 	path('',views.showline),
 	path('<slug:title>/<int:chapter>/<int:line>/', views.showline, name='showline'),
+    path('word/',views.showword),
     path('admin/', admin.site.urls),
 ]

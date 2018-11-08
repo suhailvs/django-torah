@@ -1,0 +1,11 @@
+{% load static %}
+{% load extra_filters %}
+<div style="font: 62.5%/1.4em Arial, Helvetica, sans-serif;color:#333333">
+	{{word}} : 
+	{% for l in word %}<span class="icon-{{ l | get_letternumber }}"></span>{% endfor %}
+	<br>
+	{{eng}} ({{pron}})
+	<br>
+	<p>Definition:</p>
+	<p>{{def}}</p>
+</div>
