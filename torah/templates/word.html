@@ -1,11 +1,10 @@
 {% load static %}
 {% load extra_filters %}
-<div style="font: 62.5%/1.4em Arial, Helvetica, sans-serif;color:#333333">
-	{{word}} : 
-	{% for l in word %}<span class="icon-{{ l | get_letternumber }}"></span>{% endfor %}
-	<br>
-	{{eng}} ({{pron}})
-	<br>
-	<p>Definition:</p>
+<div style="font: Arial, Helvetica, sans-serif;color:#333333">
+	<p>{{word}} : {% for l in word %}<span class="icon-{{ l | get_letternumber }}"></span>{% endfor %}</p>		
+	{% if pron != '-' %}
+	<p>{{pron}}</p>
+	<p><strong>{{eng}}</strong></p>
 	<p>{{def}}</p>
+	{% endif %}
 </div>

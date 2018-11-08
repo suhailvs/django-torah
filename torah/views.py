@@ -15,7 +15,7 @@ def showline(request, title='genesis', chapter=1, line=1):
 
 def showword(request):
 	w = request.GET.get('word','')
-	trans = ["Ancient", "Pronunciation", "English", "Definition"]
+	trans = '----'
 	if w:
 		data = json.loads(open('torah/json/paleo/dictionary.json').read())
 		for i in range(len(data['text'])):
