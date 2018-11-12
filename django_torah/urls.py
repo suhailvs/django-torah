@@ -20,5 +20,6 @@ urlpatterns = [
 	path('',views.showline),
 	path('<slug:title>/<int:chapter>/<int:line>/', views.showline, name='showline'),
     path('word/',views.showword),
+    path('ajaxview/', views.AjaxView.as_view()),
     path('admin/', admin.site.urls),
 ]
