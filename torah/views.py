@@ -46,7 +46,12 @@ class AjaxView(View):
         w = request.GET.get('word','')
         item = Word.objects.get(name = w)
         print('fetched: ', item.desc)
-        return HttpResponse(json.dumps({'id':item.id,'description':item.desc}))
+        print(item.lines.all())
+        return HttpResponse(json.dumps({
+            'id':item.id,
+            'description':item.desc,
+            'lines':[{'id':l.id,'t':l.title,'c':l.chapter,'l':l.line} for l in item.lines.all()]
+        }))
 
     def post(self, request, *args, **kwargs):
         w = Word.objects.get(id = request.POST['id'])

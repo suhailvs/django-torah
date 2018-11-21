@@ -16,3 +16,13 @@ def get_words(line):
     Return list of words of given line
     """
     return line.split(' ')
+
+@register.filter(name='get_hebrewletter')
+def get_hebrewletter(paleoletter):
+    """
+    Return Hebrew Letter curresponding to PaleoHebrew letter
+    input: a
+    output: \u05d0
+    """
+    HEBREW_UNICODE = ['\u05d0','\u05d1','\u05d2','\u05d3','\u05d4','\u05d5','\u05d6','\u05d7','\u05d8','\u05d9','\u05db','\u05dc','\u05de','\u05e0','\u05e1','\u05e2','\u05e4','\u05e6','\u05e7','\u05e8','\u05e9','\u05ea']
+    return HEBREW_UNICODE[PATTERN.index(paleoletter)]

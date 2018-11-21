@@ -14,9 +14,15 @@
   <ul class="list-group list-group-flush">
     <li class="list-group-item">{{english}}</li>
     <li class="list-group-item">{{hebrew}}</li>
+    <!-- <li class="list-group-item">{{arabic}}</li> -->
     <li class="list-group-item text-right">
       {% for word in paleo|get_words %}
         <a href="/word/?word={{word}}" class="jTip" id="word{{forloop.counter}}" data-word="{{word}}">{{word}}</a>
+      {% endfor %}
+    </li>
+    <li class="list-group-item">
+      {% for word in paleo|get_words %}
+         {% for l in word %}{{ l | get_hebrewletter }}{% endfor %}
       {% endfor %}
     </li>
 
@@ -54,6 +60,7 @@
             <label>Description:</label>
             <textarea class="form-control" id="word_description" name="description"></textarea>
           </div>
+          <div id="word_lines"></div>
         </form>
       </div>
       <div class="modal-footer">
@@ -79,8 +86,16 @@
     $.getJSON(ajaxurl, { word: word } )
     .done(function( data ) {
       $("#word_id").val(data.id);
-      $("#word_description").val(data.description);  
-
+      $("#word_description").val(data.description);
+      let links = '';
+      for (i=0; i < data.lines.length; i++){
+        links+= `
+          <a href='/${data.lines[i]['t']}/${data.lines[i]['c']}/${data.lines[i]['l']}/'>
+            ${data.lines[i]['t'][0]} ${data.lines[i]['c']}:${data.lines[i]['l']}
+          </a>, `;
+      }
+      $("#word_lines").html(links);
+      // console.log(data.lines);
       // open bootstrap modal
       $('#wordDataModal').modal();    
     });    
