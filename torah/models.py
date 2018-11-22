@@ -14,8 +14,8 @@ class Line(models.Model):
 
 
 class Word(models.Model):
-    name = models.CharField(max_length=200)
+    name = models.CharField(max_length=200) # paleo hebrew
+    translation = models.CharField(max_length = 200, default="") # englis translation
     desc = models.TextField()
     lines = models.ManyToManyField(Line)
-
 

@@ -19,9 +19,15 @@ def showline(request, title='genesis', chapter=1, line=1):
     for lang in ['paleo','english','hebrew']:
         context[lang] = get_line(lang,context['current'])
 
+        if lang == 'paleo':
+            context[lang] = context[lang][::-1]
+
     return render(request,'line.html',context)
 
 def showword(request):
+    """
+    To display data in jTip
+    """
     w = request.GET.get('word','')
     trans = '----'
     if w:
@@ -41,15 +47,21 @@ def showword(request):
 
 
 class AjaxView(View):
+    """
+    To display data in Bootstrap Model
+    """
 
     def get(self, request, *args, **kwargs):
         w = request.GET.get('word','')
-        item = Word.objects.get(name = w)
-        print('fetched: ', item.desc)
-        print(item.lines.all())
+        # try:
+        #     item = Word.objects.get(name = w)
+        # except:
+        #     item = Word.objects.get(name = w[::-1])
+        item = Word.objects.get(name = w[::-1])  # reverse the word
         return HttpResponse(json.dumps({
             'id':item.id,
             'description':item.desc,
+            'translation': item.translation,
             'lines':[{'id':l.id,'t':l.title,'c':l.chapter,'l':l.line} for l in item.lines.all()]
         }))
 
