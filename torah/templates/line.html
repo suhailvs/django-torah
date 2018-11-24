@@ -5,6 +5,15 @@
 {% block css %}
   <link rel="stylesheet" href="{% static 'paleo/paleo.css' %}">
   <link rel="stylesheet" href="{% static 'css/jtip.css' %}">
+  <style type="text/css">
+    .trans_word_hover { color: green !important; }
+    .trans_word {
+      border-bottom: 1px solid maroon; 
+      padding:2px; 
+      margin:5px; 
+      line-height: 25px;
+    }
+  </style>
 {% endblock %}
 
 {% block content %}
@@ -27,7 +36,7 @@
     </li>   
      <li class="list-group-item" style="font-size: 75%">
       {% for word in paleo|get_words %}
-        <span style="border: 1px solid maroon; padding:2px; margin:5px">{{word|get_englishword}}</span>
+        <span class="trans_word" data-n="{{forloop.counter}}">{{word|get_englishword}}</span>
       {% endfor %}
     </li>    
 
@@ -104,7 +113,7 @@
           </a>, `;
       }
       $("#word_lines").html(links);
-      // console.log(data.lines);
+
       // open bootstrap modal
       $('#wordDataModal').modal();    
     });    
@@ -115,5 +124,10 @@
     $.post(ajaxurl, $("#word_form").serialize());
   });
 
+  $('.trans_word').hover(function(){
+    // when mouse hover on english word
+    const word_num = $(this).data('n');
+    $("#word"+word_num).toggleClass('trans_word_hover');
+  });
 </script>
 {% endblock %}
