@@ -13,21 +13,21 @@
   
   <ul class="list-group list-group-flush">
     <li class="list-group-item">{{english}}</li>
-    <li class="list-group-item text-right">{{hebrew}}</li>
+    <!-- <li class="list-group-item text-right">{{hebrew}}</li>
     <li class="list-group-item text-right">
       {% for word in paleo|get_words %}
-        <a href="/word/?word={{word}}" class="jTip" id="wordhebrew{{forloop.counter}}" data-word="{{word}}">{% for l in word %}{{ l | get_hebrewletter }}{% endfor %}</a>
+        {% for l in word %}{{ l | get_hebrewletter }}{% endfor %}
       {% endfor %}
-    </li>
+    </li> -->
     <!-- <li class="list-group-item">{{arabic}}</li> -->
     <li class="list-group-item">
       {% for word in paleo|get_words %}
         <a href="/word/?word={{word}}" class="jTip" id="word{{forloop.counter}}" data-word="{{word}}">{{word}}</a>
       {% endfor %}
     </li>   
-     <li class="list-group-item">
+     <li class="list-group-item" style="font-size: 75%">
       {% for word in paleo|get_words %}
-        {{word|get_englishword}} |
+        <span style="border: 1px solid maroon; padding:2px; margin:5px">{{word|get_englishword}}</span>
       {% endfor %}
     </li>    
 
@@ -68,7 +68,7 @@
             <label>Description:</label>
             <textarea class="form-control" id="word_description" name="description"></textarea>
           </div>
-          <div id="word_lines"></div>
+          <div id="word_lines" style="font-size: 75%"></div>
         </form>
       </div>
       <div class="modal-footer">

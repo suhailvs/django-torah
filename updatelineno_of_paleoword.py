@@ -1,8 +1,16 @@
 import json
 from torah.models import Word,Line
 
+"""
+USAGE
+=====
+./manage.py shell
+>>> import updatelineno_of_paleoword
+>>> updatelineno_of_paleoword.save_word_to_db()
+"""
+
 def save_word_to_db():
-	chap='genesis,exodus,deuteronomy,leviticus,numbers'
+	chap='genesis,exodus,leviticus,numbers,deuteronomy'
 	n_lines, n_word, n_letters= 0,0,0
 	
 	for title in chap.split(','):
@@ -15,7 +23,7 @@ def save_word_to_db():
 				
 				n_word+=len(line.split(' '))
 				for word in line.split(' '):
-					w = Word.objects.get(name=word)
+					w, created = Word.objects.get_or_create(name = word)
 					l = Line.objects.get(title = title, chapter = i+1, line = j+1)
 					w.lines.add(l)
 					#if not Word.objects.filter(name=word):
