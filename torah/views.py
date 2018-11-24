@@ -16,7 +16,7 @@ def showline(request, title='genesis', chapter=1, line=1):
 
     context = {'current': {'title':title, 'chapter':chapter, 'line':line}}
 
-    for lang in ['paleo','english','hebrew']:
+    for lang in ['paleo','english','english_mtt','hebrew']:
         context[lang] = get_line(lang,context['current'])
 
         if lang == 'paleo':
