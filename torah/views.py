@@ -31,6 +31,7 @@ def showword(request):
     w = request.GET.get('word','')
     trans = '----'
     if w:
+        w = w[::-1]
         data = json.loads(open('torah/json/paleo/dictionary.json').read())
         for i in range(len(data['text'])):
             word = data['text'][i][0]
