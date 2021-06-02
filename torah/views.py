@@ -59,11 +59,12 @@ class AjaxView(View):
         # except:
         #     item = Word.objects.get(name = w[::-1])
         item = Word.objects.get(name = w[::-1])  # reverse the word
+        
         return HttpResponse(json.dumps({
             'id':item.id,
             'description':item.desc,
             'translation': item.translation,
-            'lines':[{'id':l.id,'t':l.title,'c':l.chapter,'l':l.line} for l in item.lines.all()]
+            'lines':[{'id':l.id,'t':l.title,'c':l.chapter_no,'l':l.line_no} for l in item.lines.all()]
         }))
 
     def post(self, request, *args, **kwargs):

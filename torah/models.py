@@ -9,8 +9,9 @@ class Line(models.Model):
         ('deuteronomy', 'deuteronomy')
     )
     title = models.CharField(max_length = 15,choices = TITLES)
-    chapter = models.IntegerField()
-    line = models.IntegerField()
+    chapter_no = models.IntegerField()
+    line_no = models.IntegerField()
+    name = models.TextField()
 
 
 class Word(models.Model):
